@@ -1,32 +1,26 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import pyautogui as pg
 import pyperclip as pc
 import time
 
 pg.PAUSE = 1 #Determinar um delay para nao dar problema na web
 
-# Passo 1: Entrar no sistema da empresa (link do drive)
+# Entrar no sistema da empresa (link do drive)
 pg.hotkey("ctrl", "t")
 time.sleep(10)
+
 #Se atente com os caracteres especiais nos links, caso eles sejam de endereco br
-#O pyperclip sabe lidar com esses caracteres especiais
 pc.copy("https://drive.google.com/drive/folders/149xknr9JvrlEnhNWO49zPcw0PW5icxga?usp=sharing")
 pg.hotkey("ctrl", "v")
 pg.press("enter")
 
-#carregar o sistema (o delay depende da internet)
+# carregar o sistema (o delay depende da internet)
 time.sleep(10) 
 
-# Passo 2: Navegar no sistema( até a pasta exportar)
+# Navegar no sistema( até a pasta exportar)
 pg.click(x=398, y=267, clicks=2)
 time.sleep(10)
 
-# Passo 3: Fazer download da base de vendas
+# Fazer download da base de vendas
 pg.click(x=407, y=333)
 pg.click(x=1159, y=139)
 pg.click(x=1009, y=557)
@@ -35,11 +29,7 @@ pg.click(x=499, y=447)
 
 time.sleep(15)
 
-
-# In[ ]:
-
-
-# Passo 4: Importar a base de vendas pro python
+# Importar a base de vendas pro python
 import pandas as pd
 import openpyxl
 
@@ -48,16 +38,11 @@ dataset=pd.read_excel(r"C:\Users\arils\Downloads\Vendas - Dez.xlsx", engine='ope
 #r serve para dizer para o python nao ler caracter especial
 display(dataset)
 
-# Passo 5: Calcular o faturamento e quantidade de produtos 
-#vendidos( os indicadores)
+# Calcular o faturamento e quantidade de produtos vendidos( os indicadores)
 faturamento = dataset["Valor Final"].sum()
 qtd_produtos = dataset["Quantidade"].sum()
 
-
-# In[ ]:
-
-
-#Passo 6: Enviar email para diretoria
+# Enviar email para diretoria
 
 pg.hotkey("ctrl", "t")
 pc.copy("https://mail.google.com/mail/u/4/#inbox")
